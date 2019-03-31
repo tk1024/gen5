@@ -1,5 +1,11 @@
-const WIDTH = screen.width < 960 ? screen.width*2: 1920
-const HEIGHT = screen.height < 540 ? screen.height*2: 1080
+let WIDTH = screen.width < 960 ? screen.width*2: 1920
+let HEIGHT = screen.height < 540 ? screen.height*2: 1080
+
+if(WIDTH < HEIGHT) {
+  const tWIDTH = WIDTH
+  WIDTH = HEIGHT
+  HEIGHT = tWIDTH
+}
 
 const COLUMN_TITLES = [
   "西暦",
@@ -37,6 +43,10 @@ document.addEventListener("DOMContentLoaded", () => {
   ctx = canvas.getContext('2d');
   Draw();
 })
+
+window.addEventListener('orientationchange', () => {
+  window.reload();
+}, false);
 
 const Draw = () => {
   frame += direction;
