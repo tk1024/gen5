@@ -1,5 +1,5 @@
-const WIDTH = 1920
-const HEIGHT = 1080
+const WIDTH = screen.width < 960 ? screen.width*2: 1920
+const HEIGHT = screen.height < 540 ? screen.height*2: 1080
 
 const COLUMN_TITLES = [
   "西暦",
@@ -9,10 +9,10 @@ const COLUMN_TITLES = [
 ]
 
 const COLUMN_COUNT = COLUMN_TITLES.length
-const TITLE_HEIGHT = 100
+const TITLE_HEIGHT = 70
 const BOX_PADDING_X = 100
-const BOX_PADDING_Y_START = 100
-const BOX_PADDING_Y_END = 200
+const BOX_PADDING_Y_START = 50
+const BOX_PADDING_Y_END = 170
 const BOX_WIDTH = WIDTH - BOX_PADDING_X * 2
 const BOX_HEIGHT = HEIGHT - TITLE_HEIGHT - BOX_PADDING_Y_START - BOX_PADDING_Y_END
 const GRAPH_TITLE_WIDTH = 200
@@ -20,6 +20,7 @@ const BOX_START_POSITION_X = BOX_PADDING_X
 const BOX_START_POSITION_Y = TITLE_HEIGHT + BOX_PADDING_Y_START
 const COLUMN_HEIGHT = parseInt(BOX_HEIGHT/COLUMN_COUNT, 10)
 const ONE_YEAR_WIDTH = 150
+const BASE_FONT_SIZE = HEIGHT*0.045
 
 let frame = 10700
 let direction = 0
@@ -27,6 +28,12 @@ let ctx = null
 
 document.addEventListener("DOMContentLoaded", () => {
   const canvas = document.getElementById("canvas");
+  canvas.width = WIDTH
+  canvas.height = HEIGHT
+  canvas.style.width = `${WIDTH/2}px`
+  canvas.style.height = `${HEIGHT/2}px`
+  document.querySelector(".wrapper").style.width = `${WIDTH/2}px`
+  document.querySelector(".wrapper").style.height = `${HEIGHT/2}px`
   ctx = canvas.getContext('2d');
   Draw();
 })
@@ -47,7 +54,7 @@ const Draw = () => {
 }
 
 const Title = () => {
-  const TITLE_FONT_SIZE = 72
+  const TITLE_FONT_SIZE = BASE_FONT_SIZE*1.5
   ctx.font = `${TITLE_FONT_SIZE}px serif`;
   ctx.textAlign = "center";
   ctx.fillText("西暦・元号・天皇・時代対応グラフ", WIDTH/2, TITLE_HEIGHT/2 + TITLE_FONT_SIZE/2 + BOX_PADDING_Y_START/2);
@@ -76,7 +83,7 @@ const Border = () => {
 }
 
 const GraphTitle = () => {
-  const GRAPH_TITLE_FONT_SIZE = 48
+  const GRAPH_TITLE_FONT_SIZE = BASE_FONT_SIZE
   ctx.font = `${GRAPH_TITLE_FONT_SIZE}px serif`;
   ctx.textAlign = "center";
 
@@ -107,7 +114,7 @@ const Frame = () => {
 }
 
 const AD = () => {
-  const AD_FONT_SIZE = 48
+  const AD_FONT_SIZE = BASE_FONT_SIZE
   ctx.font = `${AD_FONT_SIZE}px serif`;
   ctx.textAlign = "center";
   for(let i = 0; i < 2020;i++) {
@@ -200,8 +207,8 @@ const CalcBoxSizeAndPosition = (columnIndex, startAD, endAD, name, subName = nul
 
   // 画面外の場合は表示しない
   if(currentPosition.x.start < BOX_START_POSITION_X + BUFFER + BOX_WIDTH && currentPosition.x.end > BOX_START_POSITION_X - BUFFER) {
-    const FONT_SIZE = 42
-    const SUB_FONT_SIZE = 20
+    const FONT_SIZE = BASE_FONT_SIZE*0.9/divide
+    const SUB_FONT_SIZE = BASE_FONT_SIZE*0.6/divide
     ctx.font = `${FONT_SIZE}px serif`;
     let textPosition = {
       x: textNoMove ? start_x + width/2 - frameWithIncludeSpeed : decideTextPositionX(width, currentPosition.x.start, name),
@@ -212,10 +219,10 @@ const CalcBoxSizeAndPosition = (columnIndex, startAD, endAD, name, subName = nul
 
     ctx.fillStyle = "#000"
     if(subName !== null) {
-      ctx.fillText(name, textPosition.x, textPosition.y - 11);
+      ctx.fillText(name, textPosition.x, textPosition.y - BASE_FONT_SIZE*0.3/divide);
       ctx.font = `${SUB_FONT_SIZE}px serif`;
       let subTextPositionX = textNoMove ? start_x + width/2 - frameWithIncludeSpeed : decideTextPositionX(width, currentPosition.x.start, subName)
-      ctx.fillText(subName, subTextPositionX, textPosition.y + 11);
+      ctx.fillText(subName, subTextPositionX, textPosition.y + BASE_FONT_SIZE*0.3/divide);
     }else{
       ctx.fillText(name, textPosition.x, textPosition.y);
     }
