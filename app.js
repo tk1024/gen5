@@ -1,5 +1,5 @@
-let WIDTH = screen.width < 960 ? screen.width*2: 1920
-let HEIGHT = screen.height < 540 ? screen.height*2: 1080
+let WIDTH = document.documentElement.clientWidth < 960 ? document.documentElement.clientWidth*2: 1920
+let HEIGHT = document.documentElement.clientHeight < 540 ? document.documentElement.clientHeight*2: 1080
 
 if(WIDTH < HEIGHT) {
   const tWIDTH = WIDTH
