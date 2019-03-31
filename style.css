@@ -44,4 +44,5 @@ button {
   border-bottom: solid 4px #627295;
   border-radius: 3px;
   margin: 0 30px;
+  touch-action: manipulation;
 }
