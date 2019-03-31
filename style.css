@@ -7,6 +7,7 @@ body {
 .wrapper {
   position: relative;
 }
+
 #canvas {
   position: absolute;
   z-index: 1; 
@@ -45,4 +46,16 @@ button {
   border-radius: 3px;
   margin: 0 30px;
   touch-action: manipulation;
+}
+
+@media (min-width: 960px) {
+  html, body {
+    min-width: 100%;
+    min-height: 100vh;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

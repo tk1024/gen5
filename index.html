@@ -9,17 +9,17 @@
   <script src="tennou.js"></script>
   <script src="era.js"></script>
   <script src="app.js"></script>
-  <title>Document</title>
+  <title>西暦・元号・天皇・時代対応表</title>
 </head>
 <body>
   <div class="wrapper">
     <canvas id="canvas"></canvas>
     <div class="buttons">
-      <button onclick="direction-=1">逆再生加速</button>
-      <button onclick="direction=-1">逆再生</button>
-      <button onclick="direction=0">停止</button>
-      <button onclick="direction=1">再生</button>
-      <button onclick="direction+=1">再生加速</button>
+      <button onclick="global.direction-=1">逆再生加速</button>
+      <button onclick="global.direction=-1">逆再生</button>
+      <button onclick="global.direction=0">停止</button>
+      <button onclick="global.direction=1">再生</button>
+      <button onclick="global.direction+=1">再生加速</button>
     </div>
 </div>
 </body>
